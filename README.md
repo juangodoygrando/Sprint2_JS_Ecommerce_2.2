@@ -51,4 +51,4 @@ All processed data and final outputs will be displayed through the **console.log
 
 You can test and preview the project directly here:
 
-👉 **https://juangodoygrando.github.io/Sprint2_JavaScript_I/**
+👉 **https://juangodoygrando.github.io/Sprint2_JS_Ecommerce_2.2/**
