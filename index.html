@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="ShopNow - Your one-stop shop for grocery, beauty and clothes"
+    />
+    <meta name="author" content="IT Academy" />
+    <meta name="theme-color" content="#212529" />
+    <title>ShopNow - Online Shopping</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+
+    <!-- Fontawesome icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/custom-styles.css" />
+  </head>
+
+  <body>
+    <!-- Skip Navigation -->
+    <a href="#main-content" class="skip-link visually-hidden-focusable"
+      >Skip to main content</a
+    >
+
+    <!-- Navigation-->
+    <header class="primary-header">
+      <nav
+        class="navbar py-3 py-lg-0 navbar-light bg-light navbar-expand-lg"
+        id="main-nav"
+      >
+        <div class="container">
+          <a class="navbar-brand" href="index.html" aria-label="ShopNow Home"
+            >ShopNow</a
+          >
+
+          <aside
+            class="shopping-cart-wrapper d-flex flex-row order-lg-last align-items-center"
+          >
+            <button
+              class="navbar-toggler order-last"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbar"
+              aria-expanded="false"
+              aria-controls="navbar"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div
+              class="navbar-nav me-3 me-lg-0 d-flex flex-row align-items-center"
+            >
+              <button
+                class="btn btn-outline-dark cart-button"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#cartModal"
+                data-bs-auto-close="outside"
+                aria-label="Open shopping cart"
+              >
+                <i class="fas fa-shopping-cart me-1" aria-hidden="true"></i>
+                <span>Cart</span>
+                <span
+                  class="badge bg-dark text-white ms-1 rounded-pill"
+                  id="count_product"
+                  >0</span
+                >
+              </button>
+            </div>
+          </aside>
+
+          <nav id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav me-auto mb-4 mb-lg-0 ms-lg-5">
+              <li class="nav-item">
+                <a class="nav-link" href="#grocery">
+                  <i class="fas fa-shopping-basket" aria-hidden="true"></i>
+                  <span>Grocery</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#beauty">
+                  <i class="fas fa-heart" aria-hidden="true"></i>
+                  <span>Beauty</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#clothes">
+                  <i class="fas fa-tshirt" aria-hidden="true"></i>
+                  <span>Clothes</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section class="hero py-5" aria-label="Promotional banner">
+        <div class="container px-4 px-lg-5 my-5">
+          <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">IT Academy Shop</h1>
+            <p class="lead fw-normal text-white-50 mb-0">
+              Get up to 50% off Today Only!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product Sections -->
+      <article class="product-section pt-5" id="grocery">
+        <h2 class="text-center">
+          <i class="fas fa-shopping-basket pe-3" aria-hidden="true"></i>
+          <span>Grocery</span>
+        </h2>
+        <div class="container px-4 px-lg-5 mt-5">
+          <div
+            class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+          >
+            <!-- Product Cards -->
+            <div class="col mb-5">
+              <article class="card product-card h-100">
+                <img
+                  class="card-img-top product-img"
+                  src="./images/product_example_1.jpg"
+                  alt="Cooking Oil product image"
+                  loading="lazy"
+                />
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <h3 class="h5 fw-bolder">Cooking Oil</h3>
+                    <p class="price">$10.5</p>
+                  </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark add-to-cart"
+                      data-product-id="1"
+                      aria-label="Add Cooking Oil to cart"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="col mb-5">
+              <article class="card product-card h-100">
+                <img
+                  class="card-img-top product-img"
+                  src="./images/product_example_2.jpg"
+                  alt="Pasta product image"
+                  loading="lazy"
+                />
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <h3 class="h5 fw-bolder">Pasta</h3>
+                    <p class="price">$6.25</p>
+                  </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark add-to-cart"
+                      data-product-id="2"
+                      aria-label="Add Pasta to cart"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="col mb-5">
+              <article class="card product-card h-100">
+                <img
+                  class="card-img-top product-img"
+                  src="./images/product_example_3.jpg"
+                  alt="Instant cupcake mixture product image"
+                  loading="lazy"
+                />
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <h3 class="h5 fw-bolder">Instant cupcake mixture</h3>
+                    <p class="price">$5</p>
+                  </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark add-to-cart"
+                      data-product-id="3"
+                      aria-label="Add Instant cupcake mixture to cart"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="product-section pt-5" id="beauty">
+        <h2 class="text-center">
+          <i class="fas fa-heart pe-3" aria-hidden="true"></i>
+          <span>Beauty</span>
+        </h2>
+        <div class="container px-4 px-lg-5 mt-5">
+          <div
+            class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+          >
+            <!-- Product Cards -->
+            <div class="col mb-5">
+              <article class="card product-card h-100">
+                <img
+                  class="card-img-top product-img"
+                  src="./images/product_example_4.jpg"
+                  alt="All-in-1 product image"
+                  loading="lazy"
+                />
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <h3 class="h5 fw-bolder">All-in-1</h3>
+                    <p class="price">$260</p>
+                  </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark add-to-cart"
+                      data-product-id="4"
+                      aria-label="Add All-in-1 to cart"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="col mb-5">
+              <article class="card product-card h-100">
+                <img
+                  class="card-img-top product-img"
+                  src="./images/product_example_5.jpg"
+                  alt="Zero makeup kit product image"
+                  loading="lazy"
+                />
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <h3 class="h5 fw-bolder">Zero makeup kit</h3>
+                    <p class="price">$20.5</p>
+                  </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark add-to-cart"
+                      data-product-id="5"
+                      aria-label="Add Zero makeup kit to cart"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="col mb-5">
+              <article class="card product-card h-100">
+                <img
+                  class="card-img-top product-img"
+                  src="./images/product_example_6.jpg"
+                  alt="Lip tints product image"
+                  loading="lazy"
+                />
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <h3 class="h5 fw-bolder">Lip tints</h3>
+                    <p class="price">$12.75</p>
+                  </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark add-to-cart"
+                      data-product-id="6"
+                      aria-label="Add Lip tints to cart"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="product-section pt-5" id="clothes">
+        <h2 class="text-center">
+          <i class="fas fa-tshirt pe-3" aria-hidden="true"></i>
+          <span>Clothes</span>
+        </h2>
+        <div class="container px-4 px-lg-5 mt-5">
+          <div
+            class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+          >
+            <!-- Product Cards -->
+            <div class="col mb-5">
+              <article class="card product-card h-100">
+                <img
+                  class="card-img-top product-img"
+                  src="./images/product_example_7.jpg"
+                  alt="Lawn dress product image"
+                  loading="lazy"
+                />
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <h3 class="h5 fw-bolder">Lawn dress</h3>
+                    <p class="price">$15</p>
+                  </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark add-to-cart"
+                      data-product-id="7"
+                      aria-label="Add Lawn dress to cart"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="col mb-5">
+              <article class="card product-card h-100">
+                <img
+                  class="card-img-top product-img"
+                  src="./images/product_example_8.jpg"
+                  alt="Lawn-chiffon combo product image"
+                  loading="lazy"
+                />
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <h3 class="h5 fw-bolder">Lawn-chiffon combo</h3>
+                    <p class="price">$19.99</p>
+                  </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark add-to-cart"
+                      data-product-id="8"
+                      aria-label="Add Lawn-chiffon combo to cart"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="col mb-5">
+              <article class="card product-card h-100">
+                <img
+                  class="card-img-top product-img"
+                  src="./images/product_example_9.jpg"
+                  alt="Toddler Frock product image"
+                  loading="lazy"
+                />
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <h3 class="h5 fw-bolder">Toddler Frock</h3>
+                    <p class="price">$9.99</p>
+                  </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark add-to-cart"
+                      data-product-id="9"
+                      aria-label="Add Toddler Frock to cart"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <!-- Footer-->
+    <footer class="py-3 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">
+          Copyright &copy; ShopNow <span id="current-year">2025</span>
+        </p>
+      </div>
+    </footer>
+
+    <div
+      class="modal fade"
+      id="cartModal"
+      tabindex="-1"
+      aria-labelledby="cartModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cartModalLabel">
+              <i class="fas fa-cart-arrow-down" aria-hidden="true"></i>
+              My Cart
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <h3 class="text-center bill px-5">Shopping Cart</h3>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total <small>(with discount)</small></th>
+                  </tr>
+                </thead>
+                <tbody id="cart_list"></tbody>
+              </table>
+            </div>
+            <div class="text-center fs-3">
+              Total: $<span id="total_price">0.00</span>
+            </div>
+            <div class="text-center">
+              <a href="checkout.html" class="btn btn-primary m-3">Checkout</a>
+              <button
+                type="button"
+                class="btn btn-secondary m-3"
+                id="clean-cart"
+              >
+                Clean Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JS-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Core theme JS-->
+    <script src="js/shop.js" type="module"></script>
+    <script src="js/checkout.js" type="module"></script>
+  </body>
+</html>
