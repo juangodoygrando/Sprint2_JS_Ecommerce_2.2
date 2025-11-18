@@ -1,6 +1,4 @@
-// Exercise 6
 
-// Get the input fields
 const form = document.querySelector("form");
 const inputName = document.getElementById("fName");
 const inputEmail = document.getElementById("fEmail");
@@ -17,10 +15,11 @@ if (form) {
     e.preventDefault();
     if (validate()) {
       const cartData = {
-        name: fName.value.trim(),
-        email: fEmail.value.trim(),
-        phone: fPhone.value.trim(),
-        address: fAddress.value.trim(),
+        name: inputName.value.trim(),
+        lasName:inputLastName.value.trim(),
+        email: inputEmail.value.trim(),
+        phone: inputPhone.value.trim(),
+        address: inputAddress.value.trim(),
         items: cartList,
         total: total,
       };
@@ -40,7 +39,7 @@ const validate = () => {
   const lasNameValid = validateNameLasName(inputLastName, errorLastName);
   const emailValid = validateEmail();
   const passwordValid = validatePassword();
-  const adressValid = validateAdress();
+  const addressValid = validateAddress();
   const phoneValid = validatePhone();
 
   if (
@@ -48,7 +47,7 @@ const validate = () => {
     lasNameValid &&
     emailValid &&
     passwordValid &&
-    adressValid &&
+    addressValid &&
     phoneValid
   ) {
     return true;
@@ -112,16 +111,16 @@ const validatePassword = () => {
     return true;
   }
 };
-const validateAdress = () => {
+const validateAddress = () => {
   const errorAddress = document.getElementById("errorAddress");
-  const regexAdress = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9\s,.\-/#]+$/;
+  const regexAddress = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9\s,.\-/#]+$/;
   const inputValue = inputAddress.value.trim();
   if (inputValue.length < 3 || inputValue == "") {
     inputAddress.classList.add("is-invalid");
     errorAddress.textContent =
       "This field is required and must have, at least,3 characters";
     return false;
-  } else if (!regexAdress.test(inputValue)) {
+  } else if (!regexAddress.test(inputValue)) {
     inputAddress.classList.add("is-invalid");
     errorAddress.textContent =
       "Only letters, numbers, spaces, and , . - / # are allowed.";
