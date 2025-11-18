@@ -58,7 +58,7 @@ const validate = () => {
 
 const validateNameLasName = (input, errorClass) => {
   const inputValue = input.value.trim();
-  if (inputValue == "" || inputValue.length <= 3) {
+  if (inputValue == "" || inputValue.length < 3) {
     input.classList.add("is-invalid");
     errorClass.textContent =
       "This field is required and must have, at least, 3 characters";
@@ -133,12 +133,12 @@ const validateAddress = () => {
 };
 const validatePhone = () => {
   const errorPhone = document.getElementById("errorPhone");
-  const regexPhone = /^\d{8,9}$/;
-  const inputValue = inputPhone.value.trim();
-  if (!/^\d*$/.test(inputValue)) {
+  const regexPhone = /^(\+34\d{9}|\d{8,9})$/; 
+  const inputValue = inputPhone.value.trim().replace(/[\s-]/g, "");
+
+  if (!/^\+?\d*$/.test(inputValue)) {
     inputPhone.classList.add("is-invalid");
-    errorPhone.textContent =
-      "Phone number can only contain digits and optional +34 at the start.";
+    errorPhone.textContent = "Phone number can only contain digits (and optional +34).";
     return false;
   } else if (!regexPhone.test(inputValue)) {
     inputPhone.classList.add("is-invalid");
@@ -150,6 +150,7 @@ const validatePhone = () => {
     return true;
   }
 };
+
 
 const resetForm = () => {
   const inputs = document.querySelectorAll("input");
