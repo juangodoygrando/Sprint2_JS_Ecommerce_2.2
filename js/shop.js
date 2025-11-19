@@ -1,9 +1,7 @@
- import { products } from "./products.js"
+import { products } from "./products.js";
 
 let cartList = JSON.parse(localStorage.getItem("cartList")) || [];
 let total = 0;
-
-
 
 const productButton = document.querySelectorAll("[data-product-id]");
 let id;
@@ -49,8 +47,6 @@ const updateCartItemPrice = () => {
   localStorage.setItem("cartList", JSON.stringify(cartList));
 };
 
-
-
 const cleanButton = document.getElementById("clean-cart");
 if (cleanButton) {
   cleanButton.addEventListener("click", () => {
@@ -62,7 +58,7 @@ const cleanCart = () => {
   cartList.splice(0, cartList.length);
   localStorage.setItem("cartList", JSON.stringify(cartList));
 
-  total = 0;
+  calculateTotal();
   cartTable.innerHTML = "";
   totalPrice.textContent = 0;
   cartCount.textContent = 0;
@@ -77,6 +73,7 @@ const calculateTotal = () => {
   }
   total = accumulator.toFixed(2);
   localStorage.setItem("cartList", JSON.stringify(cartList));
+  disableCheckoutButton();
 };
 
 const applyPromotionsCart = () => {
@@ -107,8 +104,8 @@ const printCart = () => {
 									<th scope="row">${product.name}</th>
 									<td>$${product.price}</td>
 									<td>
-                    <div class="pl-1">
-                      <button class="btn btn-outline-secondary btn-sm me-2 btn-restar" data-id="${
+                    <div class="pl-1 ">
+                      <button class="btn btn-modalPrimary btn-sm me-2 btn-restar" data-id="${
                         product.id
                       }">
                           <i class="fas fa-minus"></i>
@@ -116,7 +113,7 @@ const printCart = () => {
 
                         <span class="cantidad">${product.quantity}</span>
 
-                      <button class="btn btn-outline-secondary btn-sm ms-2 btn-sumar"  data-id="${
+                      <button class="btn btn-modalPrimary btn-sm ms-2 btn-sumar"  data-id="${
                         product.id
                       }">
                           <i class="fas fa-plus"></i>
@@ -182,5 +179,31 @@ const open_modal = () => {
   printCart();
 };
 
+function disableCheckoutButton() {
+  const checkoutButton = document.getElementById("checkoutButton");
+  if (!checkoutButton) return;
+
+  if (cartList.length === 0) {
+    checkoutButton.setAttribute("disabled", "");
+  } else {
+    checkoutButton.removeAttribute("disabled");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  disableCheckoutButton();
+
+  const checkoutButton = document.getElementById("checkoutButton");
+  if (checkoutButton) {
+    checkoutButton.addEventListener("click", () => {
+      if (!checkoutButton.hasAttribute("disabled")) {
+        window.location.href = "./checkout.html";
+      }
+    });
+  }
+});
+
 removeFromCart();
 open_modal();
+
+window.open_modal = open_modal;
