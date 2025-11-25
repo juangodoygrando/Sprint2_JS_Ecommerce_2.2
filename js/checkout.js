@@ -1,4 +1,3 @@
-
 const form = document.querySelector("form");
 const inputName = document.getElementById("fName");
 const inputEmail = document.getElementById("fEmail");
@@ -10,18 +9,19 @@ const inputPhone = document.getElementById("fPhone");
 const errorName = document.getElementById("errorName");
 const errorLastName = document.getElementById("errorLastN");
 
+let cartList = JSON.parse(localStorage.getItem("cartList")) || [];
+
 if (form) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     if (validate()) {
       const cartData = {
         name: inputName.value.trim(),
-        lasName:inputLastName.value.trim(),
+        lasName: inputLastName.value.trim(),
         email: inputEmail.value.trim(),
         phone: inputPhone.value.trim(),
         address: inputAddress.value.trim(),
         items: cartList,
-        total: total,
       };
       Swal.fire({
         title: "Success!",
@@ -91,26 +91,67 @@ const validateEmail = () => {
     return true;
   }
 };
+
 const validatePassword = () => {
   const errorPassword = document.getElementById("errorPassword");
-  const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
   const inputValue = inputPassword.value.trim();
-  if (inputValue.length < 4 || inputValue == "") {
+
+  const regexLettersNumbers = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
+
+  const weakAutoPasswords = [
+    "1234",
+    "12345",
+    "123456",
+    "password",
+    "pass123",
+    "test",
+    "test123",
+    "qwerty",
+    "abcd",
+    "abc123",
+    "admin",
+    "user123",
+  ];
+
+  if (!inputValue) {
+    inputPassword.classList.add("is-invalid");
+    errorPassword.textContent = "The password cannot be empty.";
+    return false;
+  }
+
+  if (inputValue.length < 4) {
     inputPassword.classList.add("is-invalid");
     errorPassword.textContent =
       "The password must be at least 4 characters long.";
     return false;
-  } else if (!regexPassword.test(inputValue)) {
+  }
+
+  if (weakAutoPasswords.includes(inputValue.toLowerCase())) {
     inputPassword.classList.add("is-invalid");
     errorPassword.textContent =
-      "The password must contain letters and numbers.";
+      "The password is too weak or automatically generated. Please choose another.";
     return false;
-  } else {
-    inputPassword.classList.remove("is-invalid");
-    inputPassword.classList.add("is-valid");
-    return true;
   }
+
+  if (!regexLettersNumbers.test(inputValue)) {
+    inputPassword.classList.add("is-invalid");
+    errorPassword.textContent =
+      "The password must contain both letters and numbers.";
+    return false;
+  }
+
+  if (/^(.)\1+$/.test(inputValue)) {
+    // ej: "1111", "aaaa"
+    inputPassword.classList.add("is-invalid");
+    errorPassword.textContent = "The password cannot be a repeated pattern.";
+    return false;
+  }
+
+  inputPassword.classList.remove("is-invalid");
+  inputPassword.classList.add("is-valid");
+  return true;
 };
+
 const validateAddress = () => {
   const errorAddress = document.getElementById("errorAddress");
   const regexAddress = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9\s,.\-/#]+$/;
@@ -131,26 +172,60 @@ const validateAddress = () => {
     return true;
   }
 };
+
 const validatePhone = () => {
   const errorPhone = document.getElementById("errorPhone");
-  const regexPhone = /^(\+34\d{9}|\d{8,9})$/; 
-  const inputValue = inputPhone.value.trim().replace(/[\s-]/g, "");
 
-  if (!/^\+?\d*$/.test(inputValue)) {
+  let inputValue = inputPhone.value.trim().replace(/[()\s-]/g, "");
+
+  const regexValidChars = /^\+?\d+$/;
+
+  const regexLength = /^\+?\d{7,15}$/;
+
+  const fakePhones = new Set([
+    "123456789",
+    "111111111",
+    "000000000",
+    "+34123456789",
+    "+34000000000",
+  ]);
+
+  if (!inputValue) {
     inputPhone.classList.add("is-invalid");
-    errorPhone.textContent = "Phone number can only contain digits (and optional +34).";
+    errorPhone.textContent = "Phone number cannot be empty.";
     return false;
-  } else if (!regexPhone.test(inputValue)) {
-    inputPhone.classList.add("is-invalid");
-    errorPhone.textContent = "Invalid phone number format.";
-    return false;
-  } else {
-    inputPhone.classList.remove("is-invalid");
-    inputPhone.classList.add("is-valid");
-    return true;
   }
-};
 
+  if (fakePhones.has(inputValue)) {
+    inputPhone.classList.add("is-invalid");
+    errorPhone.textContent =
+      "The phone number appears to be automatically generated.";
+    return false;
+  }
+
+  if (!regexValidChars.test(inputValue)) {
+    inputPhone.classList.add("is-invalid");
+    errorPhone.textContent =
+      "Phone number can only contain digits (and an optional leading +).";
+    return false;
+  }
+
+  if (!regexLength.test(inputValue)) {
+    inputPhone.classList.add("is-invalid");
+    errorPhone.textContent = "Phone number length is not valid.";
+    return false;
+  }
+
+  if (/12345/.test(inputValue) || /98765/.test(inputValue)) {
+    inputPhone.classList.add("is-invalid");
+    errorPhone.textContent = "Sequential numbers are not allowed.";
+    return false;
+  }
+
+  inputPhone.classList.remove("is-invalid");
+  inputPhone.classList.add("is-valid");
+  return true;
+};
 
 const resetForm = () => {
   const inputs = document.querySelectorAll("input");

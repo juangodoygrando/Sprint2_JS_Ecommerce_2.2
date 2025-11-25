@@ -64,7 +64,7 @@ const cleanCart = () => {
   cartCount.textContent = 0;
 };
 
-const calculateTotal = () => {
+export const calculateTotal = () => {
   let accumulator = 0;
   for (let product of cartList) {
     if (cartList.length != 0) {
