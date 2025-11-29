@@ -1,7 +1,17 @@
-import { products } from "./products.js";
+import {
+  buy,
+  updateCartItemPrice,
+  applyPromotionsCart,
+  calculateTotal,
+  cleanCartLogic,
+  updateCartList,
+  cartList,
+  incrementQuantity,
+  decrementQuantity,
+  removeProduct,
+} from "./cartLogic.js";
 
-let cartList = JSON.parse(localStorage.getItem("cartList")) || [];
-let total = 0;
+import { cleanCartUi, printCartUi } from "./cartUi.js";
 
 const productButton = document.querySelectorAll("[data-product-id]");
 let id;
@@ -17,119 +27,13 @@ for (let product of productButton) {
   });
 }
 
-const buy = (id) => {
-  for (let product of products) {
-    if (id === product.id) {
-      for (let productCart of cartList) {
-        if (productCart.id === id) {
-          productCart.quantity++;
-          localStorage.setItem("cartList", JSON.stringify(cartList));
-
-          return;
-        }
-      }
-      cartList.push({
-        ...product,
-        quantity: 1,
-        totalPriceElement: product.price,
-      });
-      localStorage.setItem("cartList", JSON.stringify(cartList));
-
-      return;
-    }
-  }
-};
-
-const updateCartItemPrice = () => {
-  for (let productCart of cartList) {
-    productCart.totalPriceElement = productCart.quantity * productCart.price;
-  }
-  localStorage.setItem("cartList", JSON.stringify(cartList));
-};
-
 const cleanButton = document.getElementById("clean-cart");
 if (cleanButton) {
   cleanButton.addEventListener("click", () => {
-    cleanCart();
+    cleanCartLogic();
+    cleanCartUi();
   });
 }
-
-const cleanCart = () => {
-  cartList.splice(0, cartList.length);
-  localStorage.setItem("cartList", JSON.stringify(cartList));
-
-  calculateTotal();
-  cartTable.innerHTML = "";
-  totalPrice.textContent = 0;
-  cartCount.textContent = 0;
-};
-
-export const calculateTotal = () => {
-  let accumulator = 0;
-  for (let product of cartList) {
-    if (cartList.length != 0) {
-      accumulator = accumulator + product.totalPriceElement;
-    }
-  }
-  total = accumulator.toFixed(2);
-  localStorage.setItem("cartList", JSON.stringify(cartList));
-  disableCheckoutButton();
-};
-
-const applyPromotionsCart = () => {
-  for (let productCart of cartList) {
-    if (
-      "offer" in productCart &&
-      productCart.quantity >= productCart.offer.number
-    ) {
-      productCart.totalPriceElement =
-        productCart.totalPriceElement * (1 - productCart.offer.percent / 100);
-    }
-  }
-  localStorage.setItem("cartList", JSON.stringify(cartList));
-};
-
-const cartTable = document.getElementById("cart_list");
-const totalPrice = document.getElementById("total_price");
-const cartCount = document.getElementById("count_product");
-
-const printCart = () => {
-  let carritoProductosHTML = "";
-  let cartItems = 0;
-
-  if (cartTable && totalPrice) {
-    for (let product of cartList) {
-      cartItems += product.quantity;
-      carritoProductosHTML += `<tr>
-									<th scope="row">${product.name}</th>
-									<td>$${product.price}</td>
-									<td>
-                    <div class="pl-1 ">
-                      <button class="btn btn-modalPrimary btn-sm me-2 btn-restar" data-id="${
-                        product.id
-                      }">
-                          <i class="fas fa-minus"></i>
-                      </button>
-
-                        <span class="cantidad">${product.quantity}</span>
-
-                      <button class="btn btn-modalPrimary btn-sm ms-2 btn-sumar"  data-id="${
-                        product.id
-                      }">
-                          <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
-                  </td>
-									<td>$ ${product.totalPriceElement.toFixed(2)}</td>
-								</tr>`;
-    }
-    cartTable.innerHTML = carritoProductosHTML;
-    totalPrice.innerHTML = ` ${total}`;
-    cartCount.textContent = cartItems;
-  }
-
-  localStorage.setItem("cartList", JSON.stringify(cartList));
-};
 
 const removeFromCart = () => {
   const parentElement = document.getElementById("cart_list");
@@ -143,43 +47,29 @@ const removeFromCart = () => {
       if (elementoCliqueado != null) {
         idElementoCliqueado = parseInt(elementoCliqueado.dataset.id);
         product = cartList.find((item) => item.id === idElementoCliqueado);
-      }
 
-      if (elementoCliqueado.classList.contains("btn-sumar")) {
-        product.quantity++;
-        updateCartItemPrice();
-        applyPromotionsCart();
-        calculateTotal();
-        printCart();
-      } else if (elementoCliqueado.classList.contains("btn-restar")) {
-        if (product.quantity === 1) {
-          let indice = cartList.findIndex(
-            (product) => product.id === idElementoCliqueado
-          );
-          cartList.splice(indice, 1);
-          updateCartItemPrice();
-          applyPromotionsCart();
-          calculateTotal();
-          printCart();
-        } else {
-          product.quantity--;
-          updateCartItemPrice();
-          applyPromotionsCart();
-          calculateTotal();
-          printCart();
+        if (elementoCliqueado.classList.contains("btn-sumar")) {
+          incrementQuantity(idElementoCliqueado);
+          printCartUi();
+        } else if (elementoCliqueado.classList.contains("btn-restar")) {
+          if (product.quantity === 1) {
+            removeProduct(idElementoCliqueado);
+          } else {
+            decrementQuantity(idElementoCliqueado);
+          }
+          printCartUi();
         }
       }
     });
   }
-  localStorage.setItem("cartList", JSON.stringify(cartList));
 };
 
 const open_modal = () => {
   calculateTotal();
-  printCart();
+  printCartUi();
 };
 
-function disableCheckoutButton() {
+export function disableCheckoutButton() {
   const checkoutButton = document.getElementById("checkoutButton");
   if (!checkoutButton) return;
 

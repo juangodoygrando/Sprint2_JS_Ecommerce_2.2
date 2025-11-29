@@ -9,7 +9,8 @@ const inputPhone = document.getElementById("fPhone");
 const errorName = document.getElementById("errorName");
 const errorLastName = document.getElementById("errorLastN");
 
-let cartList = JSON.parse(localStorage.getItem("cartList")) || [];
+import { cartList, total } from "./cartLogic.js";
+
 
 if (form) {
   form.addEventListener("submit", (e) => {
@@ -22,6 +23,7 @@ if (form) {
         phone: inputPhone.value.trim(),
         address: inputAddress.value.trim(),
         items: cartList,
+        Total:total
       };
       Swal.fire({
         title: "Success!",
